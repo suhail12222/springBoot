@@ -32,6 +32,11 @@ public class DemoServiceImpl implements DemoService {
     @CacheEvict(value = "people")
     public void remove(Long id) {
         System.out.println("删除了id、key为"+id+"的数据缓存");
+    Person person=    personRepository.findById(id).orElseThrow(()-> new RuntimeException("not found with this id "));
+        if(person!=null){
+            personRepository.remove(person);
+        }
+        else null;
         //这里不做实际删除操作
     }
 
